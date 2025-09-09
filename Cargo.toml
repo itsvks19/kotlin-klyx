@@ -1,0 +1,12 @@
+[package]
+name = "klyx_kotlin"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+path = "src/kotlin.rs"
+crate-type = ["cdylib"]
+
+[dependencies]
+klyx_extension_api = "1.3.3"
+zip = "5.0.0"

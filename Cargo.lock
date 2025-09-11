@@ -166,7 +166,7 @@ dependencies = [
 
 [[package]]
 name = "klyx_kotlin"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "klyx_extension_api",
 ]

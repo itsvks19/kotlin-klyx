@@ -1,5 +1,8 @@
 # kotlin-klyx
 
+> [!IMPORTANT]
+> Java must be installed on your system. JAVA_HOME must be set.
+
 Kotlin language support for [Klyx](https://github.com/klyx-dev/klyx).
 
 ## Language Servers

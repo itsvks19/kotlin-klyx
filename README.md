@@ -32,7 +32,7 @@ source ~/.bashrc
 Download the Gradle distribution zip:
 
 ```bash
-wget https://services.gradle.org/distributions/gradle-9.2.1-bin.zip
+curl -LO https://services.gradle.org/distributions/gradle-9.2.1-bin.zip
 ```
 
 Create a directory and unzip it:

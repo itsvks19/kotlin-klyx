@@ -1,9 +1,59 @@
 # kotlin-klyx
 
+Kotlin language support for [Klyx](https://github.com/klyx-dev/klyx).
+
 > [!IMPORTANT]
 > Java must be installed on your system. JAVA_HOME must be set.
 
-Kotlin language support for [Klyx](https://github.com/klyx-dev/klyx).
+## Installing Java (if not already installed)
+
+If Java is not installed on your system, install the default JDK using:
+
+```bash
+sudo apt update
+sudo apt install default-jdk
+```
+
+After installation, verify it with:
+
+```bash
+java -version
+```
+
+And ensure `JAVA_HOME` is set:
+
+```bash
+echo "export JAVA_HOME=/usr/lib/jvm/default-java" >> ~/.bashrc
+source ~/.bashrc
+```
+
+## Installing Gradle (if not already installed)
+
+Download the Gradle distribution zip:
+
+```bash
+wget https://services.gradle.org/distributions/gradle-9.2.1-bin.zip
+```
+
+Create a directory and unzip it:
+
+```bash
+sudo mkdir /opt/gradle
+sudo unzip -d /opt/gradle gradle-9.2.1-bin.zip
+```
+
+Add Gradle to your PATH:
+
+```bash
+echo "export PATH=\$PATH:/opt/gradle/gradle-9.2.1/bin" >> ~/.bashrc
+source ~/.bashrc
+```
+
+Verify installation:
+
+```bash
+gradle -v
+```
 
 ## Language Servers
 
@@ -13,11 +63,9 @@ The [Kotlin Language Server](https://github.com/fwcd/kotlin-language-server) is 
 
 #### Configuration
 
-Workspace configuration options can be passed to the language server via lsp
-settings in `settings.json`.
+Workspace configuration options can be passed to the language server via lsp settings in `settings.json`.
 
-The following example changes the JVM target from `default` (which is 1.8) to
-`17`:
+The following example changes the JVM target from `default` (which is 1.8) to `17`:
 
 ```json
 {
@@ -35,8 +83,7 @@ The following example changes the JVM target from `default` (which is 1.8) to
 }
 ```
 
-The full list of workspace configuration options can be found
-[here](https://github.com/fwcd/kotlin-language-server/blob/main/server/src/main/kotlin/org/javacs/kt/Configuration.kt).
+The full list of workspace configuration options can be found [here](https://github.com/fwcd/kotlin-language-server/blob/main/server/src/main/kotlin/org/javacs/kt/Configuration.kt).
 
 ### Kotlin LSP
 
@@ -44,7 +91,7 @@ The full list of workspace configuration options can be found
 
 #### Configuration
 
-To use Kotlin LSP instead of the Kotlin Language Server, you must explicity enable it in your `settings.json`:
+To use Kotlin LSP instead of the Kotlin Language Server, you must explicitly enable it in your `settings.json`:
 
 ```json
 {

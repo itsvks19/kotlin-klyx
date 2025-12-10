@@ -79,7 +79,7 @@ fn download_from_teamcity(version: &str) -> Result<String> {
     };
 
     let url = format!(
-        "https://download-cdn.jetbrains.com/kotlin-lsp/{version}/kotlin-{version}-{os}-{arch}.zip"
+        "https://download-cdn.jetbrains.com/kotlin-lsp/{version}/kotlin-lsp-{version}-{os}-{arch}.zip"
     );
 
     let user_home = std::env::var("USER_HOME").map_err(|_| "Failed to get user home directory")?;

@@ -1,8 +1,6 @@
 use std::path::Path;
 
-use klyx_extension_api::{self as klyx, Result, make_file_executable};
-
-use crate::language_servers::archive_utils;
+use klyx_extension_api::{self as klyx, Architecture, Os, Result, make_file_executable};
 
 pub struct KotlinLSP {
     cached_binary_path: Option<String>,
@@ -68,18 +66,29 @@ fn get_version() -> Result<String> {
 }
 
 fn download_from_teamcity(version: &str) -> Result<String> {
-    let url =
-        format!("https://download-cdn.jetbrains.com/kotlin-lsp/{version}/kotlin-{version}.zip");
+    let os = match klyx::current_platform() {
+        (Os::Android, _) | (Os::Linux, _) => "linux",
+        (Os::Mac, _) => "mac",
+        (Os::Windows, _) => "windows",
+        _ => return Err("Unsupported platform".into()),
+    };
+    let arch = match klyx::current_platform() {
+        (_, Architecture::Aarch64) => "aarch64",
+        (_, Architecture::X8664) => "x64",
+        _ => return Err("Unsupported architecture".into()),
+    };
+
+    let url = format!(
+        "https://download-cdn.jetbrains.com/kotlin-lsp/{version}/kotlin-{version}-{os}-{arch}.zip"
+    );
+
     let user_home = std::env::var("USER_HOME").map_err(|_| "Failed to get user home directory")?;
     let target_dir = format!("{}/kotlin-lsp-{version}", user_home);
-    let zip_path = format!("{}/kotlin-{version}.zip", target_dir);
     let script_path = format!("{}/kotlin-lsp.sh", target_dir);
 
     if !Path::new(&target_dir).exists() {
-        klyx::download_file(&url, &zip_path).map_err(|e| format!("failed to download zip: {e}"))?;
-
-        archive_utils::extract_and_delete_zip(&zip_path, &target_dir)
-            .map_err(|e| format!("failed to extract zip: {e}"))?;
+        klyx::download_file(&url, &target_dir, klyx::DownloadedFileType::Zip)
+            .map_err(|e| format!("failed to download zip: {e}"))?;
 
         make_file_executable(&script_path)
             .map_err(|e| format!("failed to make script executable: {e}"))?;

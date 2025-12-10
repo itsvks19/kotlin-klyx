@@ -155,9 +155,9 @@ checksum = "4a5f13b858c8d314ee3e8f639011f7ccefe71f97f96e50151fb991f267928e2c"
 
 [[package]]
 name = "klyx_extension_api"
-version = "1.3.4"
+version = "1.3.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "95aca1ad7079f34a3ae2f44f13d477660e67ef523b542f3a5918512f4e338c42"
+checksum = "fc60c46db60e84c98e5a42fb0b7c5bc881ea3e970670ae7ec9a80386c49885fe"
 dependencies = [
  "serde",
  "serde_json",
@@ -166,7 +166,7 @@ dependencies = [
 
 [[package]]
 name = "klyx_kotlin"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "klyx_extension_api",
 ]

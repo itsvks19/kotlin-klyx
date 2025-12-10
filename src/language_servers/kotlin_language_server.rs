@@ -2,8 +2,6 @@ use std::fs;
 
 use klyx_extension_api::{self as klyx, Result};
 
-use crate::language_servers::archive_utils;
-
 pub struct KotlinLanguageServer {
     cached_binary_path: Option<String>,
 }
@@ -58,12 +56,12 @@ impl KotlinLanguageServer {
                 &klyx::LanguageServerInstallationStatus::Downloading,
             );
 
-            let zip_path = format!("{version_dir}/{asset_name}");
-            klyx::download_file(&asset.download_url, &zip_path)
-                .map_err(|e| format!("failed to download file error: {e}"))?;
-
-            archive_utils::extract_and_delete_zip(&zip_path, &version_dir)
-                .map_err(|e| format!("failed to extract archive: {e}"))?;
+            klyx::download_file(
+                &asset.download_url,
+                &version_dir,
+                klyx::DownloadedFileType::Zip,
+            )
+            .map_err(|e| format!("failed to download file error: {e}"))?;
 
             klyx::make_file_executable(&binary_path)
                 .map_err(|e| format!("failed to make binary executable: {e}"))?;
